@@ -1,31 +1,47 @@
+const fs = require('fs');
 const Discord = require('discord.js');
+const { prefix, token } = require('./config.json');
+
 const client = new Discord.Client();
-const auth = require('./auth.json');
+client.commands = new Discord.Collection();
 
-var greetings = ["Hello there", "Hi there", "Hullo there", "Hullo", "Hi", "Heyo", "Heyos", "Yo", "Hiya"];
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-function greet() {
-    var num = Math.floor(Math.random()*greetings.length);
-    return greetings[num];
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.commands.set(command.name, command);
 }
 
-var exp;
-
 client.on('ready', () => {
-    client.user.setActivity(`existing`);
+    client.user.setActivity("staring into void of existence.", { type: "PLAYING"});
     console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
   });
 
+
 client.on('message', msg => {
     console.log(msg.content);
-    if (greetings.includes(msg.content) && !msg.author.bot) {
-        msg.channel.send(greet());
+    if (!msg.content.startsWith(prefix) || msg.author.bot) return;
+
+    const args = msg.content.slice(prefix.length).split(/ +/);
+    const commandName = args.shift().toLowerCase();
+    if (!client.commands.has(commandName)) return;
+
+    const command = client.commands.get(commandName);
+
+    try {
+	    command.execute(msg, args, client);
+    } catch (error) {
+	    console.error(error);
+	    msg.reply('Error in Execution!');
     }
 });
 
-client.on('guildMemberAdd', (member) => {
+/*client.on('guildMemberAdd', (member) => {
     console.log(`${member.user.username} has joined.`);
-});
+});*/
 
 
-client.login(auth.token);
+client.login(token);
