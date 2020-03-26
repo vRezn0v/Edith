@@ -22,5 +22,11 @@ module.exports = {
 
     formatDate: function(date) {
         return new Intl.DateTimeFormat('en-US').format(date);
+    },
+    checkState: function() {
+        return log_state;
+    },
+    setState: function(newstate) {
+        log_state = newstate;
     }
 }
