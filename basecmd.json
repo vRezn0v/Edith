@@ -1,6 +1,0 @@
-{
-    "name": "kick",
-    "description": "Kicks tagged user after confirmation.",
-    "role" : "Moderator At Least",
-    "category": "moderation"
-}

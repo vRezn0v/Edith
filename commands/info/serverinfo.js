@@ -1,8 +1,9 @@
 module.exports = {
-	name: 'serverinfo',
+    name: 'serverinfo',
+    aliases: ["server","serv"],
 	description: 'Basic Server Info',
 	run: async (client, msg, args) => {
-        var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         var userCount = msg.guild.members.filter(member => !member.user.bot).size;
         var botCount = msg.guild.members.filter(member => member.user.bot).size; 
         const serverinfo = {
@@ -10,7 +11,7 @@ module.exports = {
             title: msg.guild.name,
             author: {
                 name: 'Edith',
-                icon_url: 'https://i.imgur.com/wSTFkRM.png',
+                icon_url: `${msg.author.displayAvatarURL}`,
                 url: 'https://github.com/vrezn0v/edith',
             },
             description: 'Some description here',

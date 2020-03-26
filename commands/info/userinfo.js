@@ -1,10 +1,10 @@
-const {getMember, formatDate } = require("../helpers.js");
+const {getMember, formatDate } = require("../../helpers.js");
 const { RichEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 
 module.exports = {
     name: 'userinfo',
-    aliases: ["whois","who"],
+    aliases: ["whois","who","user"],
     category: "info",
     description: 'Info for tagged user, duh!',
     usage: "[username | id, |mention]",
