@@ -32,7 +32,7 @@ client.on('message', msg => {
     const command = client.commands.get(commandName);
 
     try {
-	    command.execute(msg, args, client);
+	    command.run(client, msg, args);
     } catch (error) {
 	    console.error(error);
 	    msg.reply('Error in Execution!');

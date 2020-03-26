@@ -1,7 +1,7 @@
 module.exports = {
     name: 'mod',
     description: 'Commands to help with moderation.',
-    execute(msg, args, client){
+    run: async (msg, args, client) => {
         msg.channel.send(`${args}`);
         console.log(args);
         if (args[0]==='kick'){

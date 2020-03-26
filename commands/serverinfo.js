@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'serverinfo',
 	description: 'Basic Server Info',
-	execute(msg, args, client) {
+	run: async (client, msg, args) => {
         var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         var userCount = msg.guild.members.filter(member => !member.user.bot).size;
         var botCount = msg.guild.members.filter(member => member.user.bot).size; 
