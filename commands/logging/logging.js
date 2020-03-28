@@ -1,5 +1,5 @@
 var log_state  = require("../../config.json");
-const {checkState, setState } = require("../../helpers.js");
+const {checkState, setState, setLogChannel } = require("../../helpers.js");
 
 var log_channel = "";
 
@@ -26,12 +26,16 @@ module.exports = {
                 return;
             }
             setState(false);
-            console.log("[-] Mission Report Enabled.")
+            console.log("[-] Mission Report Disabled.")
+        } else if (args[0]==='channel'){
+                var channel = args[1];
+                console.log(channel);
+                setLogChannel(log_channel, channel);
         }
         if (checkState){
-            client.on('messageDelete', function(message, channel){
-                console.log(message);
-                message.channel.send(`${message} was deleted by god knows who.`)
+            client.on('messageDelete', function(message, log_channel){
+                console.log("event flag");
+                log_channel.send(`A message was deleted by god knows who.`)
             });
         }
     }

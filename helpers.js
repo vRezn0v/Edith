@@ -28,5 +28,11 @@ module.exports = {
     },
     setState: function(newstate) {
         log_state = newstate;
+    },
+    setReportChannel: function(rc, channel){
+        rc = channel;
+    },
+    setLogChannel: function(lc, channel){
+        lc = channel;
     }
 }
